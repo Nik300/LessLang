@@ -15,13 +15,13 @@ Parser  | ⌚ Planned
 ### Unix systems (Linux/macOS)
 This is currently the only options to try out the runtime.<br/>
 First install these dependencies:<br/>
-Dependency         | Required
------------------- | --------
-build-essentials   | YES
-gcc, g++ compilers | YES
-VS Code            | NO
-make               | YES
-git                | NO
+Dependency         | Required | Link
+------------------ | -------- | -----------------------------------------------
+build-essentials   | YES      |
+gcc, g++ compilers | YES      |
+VS Code            | NO       | [here](https://code.visualstudio.com/download)
+make               | YES      |
+git                | NO       |
 
 Next, build one of the tests as follows:
 `make tests/<test name>` <br/>
