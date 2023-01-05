@@ -17,11 +17,11 @@ This is currently the only options to try out the runtime.<br/>
 First install these dependencies:<br/>
 Dependency         | Required
 ------------------ | --------
-build-essentials   |   YES
-gcc, g++ compilers |   YES
-    VS Code        |   NO
-      make         |   YES
-      git          |   NO
+build-essentials   | YES
+gcc, g++ compilers | YES
+VS Code            | NO
+make               | YES
+git                | NO
 
 Next, build one of the tests as follows:
 `make tests/<test name>` <br/>
