@@ -2,6 +2,8 @@
 #include <lesslang/types/runtime/document.hpp>
 #include <lesslang/types/runtime/primitives/string.hpp>
 #include <lesslang/types/runtime/primitives/number.hpp>
+#include <lesslang/types/runtime/primitives/boolean.hpp>
+#include <lesslang/types/runtime/primitives/unsigned.hpp>
 #include <lesslang/types/runtime/primitives/union.hpp>
 
 int main()
@@ -13,13 +15,42 @@ int main()
 
     document main("main");
 
-    auto scope = main.root()->createChild("test")->createChild("ok");
-    bool r = scope->decGlobal("var", new primitives::union_type(vector<typebase*> {
-        string_type::instance(),
-        number_type::instance()
-    }), new primitives::number_obj(10));
-    main.get("test:ok:var")->call(nullptr, vector<object *>());
+    auto scope = main.root();
 
-    main.set("test:ok:var", new string_obj("Hello World!"));
-    main.get("test:ok:var")->call(nullptr, vector<object *>());
+    // var: "first" | "second" | 1 | 2 | 0x1 | 0x2 | false
+    bool r = scope->decGlobal("var", new primitives::union_type(vector<typebase*> {
+        new string_type("first"),
+        new string_type("second"),
+        new number_type(1),
+        new number_type(2),
+        new unsigned_type(0x1),
+        new unsigned_type(0x2)
+    }));
+    
+    main.set("var", new string_obj("first"));
+    main.get("var")->call(nullptr, vector<object *> {});
+    
+    main.set("var", new string_obj("second"));
+    main.get("var")->call(nullptr, vector<object *> {});
+    
+    main.set("var", new string_obj("blabla"));
+    main.get("var")->call(nullptr, vector<object *> {});
+
+    main.set("var", new number_obj(1));
+    main.get("var")->call(nullptr, vector<object *> {});
+    
+    main.set("var", new number_obj(2));
+    main.get("var")->call(nullptr, vector<object *> {});
+    
+    main.set("var", new number_obj(3));
+    main.get("var")->call(nullptr, vector<object *> {});
+    
+    main.set("var", new unsigned_obj(0x1));
+    main.get("var")->call(nullptr, vector<object *> {});
+    
+    main.set("var", new unsigned_obj(0x2));
+    main.get("var")->call(nullptr, vector<object *> {});
+    
+    main.set("var", new unsigned_obj(0x3));
+    main.get("var")->call(nullptr, vector<object *> {});
 }

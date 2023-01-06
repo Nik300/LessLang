@@ -11,7 +11,9 @@ object * string_type::typeInfo() { return nullptr; }
 bool string_type::check(object *value, bool first) const
 {
     auto *type = value->type();
-    return type->spec() == type_t::TYPE && type->id() == STRING_TYPEID;
+    return
+        type->spec() == type_t::TYPE && type->id() == STRING_TYPEID &&
+        (!_content ? true : ((string_obj *)value)->value() == _val);
 }
 uint32_t string_type::id() const { return STRING_TYPEID; }
 

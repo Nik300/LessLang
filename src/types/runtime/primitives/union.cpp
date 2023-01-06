@@ -22,8 +22,7 @@ uint32_t union_type::id() const { return UNION_TYPEID; }
 makeResult_t union_type::make(std::string name) 
 {
     return makeResult_t {
-        .success = true,
-        .result = variable(name, this)
+        .success = false
     };
 }
 makeResult_t union_type::make(std::string name, std::vector<typebase*>)

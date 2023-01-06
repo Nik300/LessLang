@@ -11,7 +11,9 @@ object * number_type::typeInfo() { return nullptr; }
 bool number_type::check(object *value, bool first) const
 {
     auto *type = value->type();
-    return type->spec() == type_t::TYPE && type->id() == NUMBER_TYPEID;
+    return
+        type->spec() == type_t::TYPE && type->id() == NUMBER_TYPEID &&
+        (!_content ? true : ((number_obj *)value)->value() == _val);
 }
 uint32_t number_type::id() const { return NUMBER_TYPEID; }
 
@@ -37,7 +39,7 @@ number_type * number_type::instance()
 #pragma endregion
 
 #pragma region OBJECT
-number_obj::number_obj(uint64_t value) : object(number_type::instance()), _value(value)
+number_obj::number_obj(int64_t value) : object(number_type::instance()), _value(value)
 {
 }
 object * number_obj::applyOperator(std::string op, object *right) const
@@ -45,8 +47,14 @@ object * number_obj::applyOperator(std::string op, object *right) const
     if (!number_type::instance()->check(right)) return nullptr;
     number_obj *other = (number_obj *)right;
 
-    if (op == "+")
+    if (op == "+" && other)
         return new number_obj(_value + other->_value);
+    else if (op == "-" && other)
+        return new number_obj(_value - other->_value);
+    else if (op == "/" && other)
+        return new number_obj(_value / other->_value);
+    else if (op == "*" && other)
+        return new number_obj(_value * other->_value);
     
     return nullptr;
 }

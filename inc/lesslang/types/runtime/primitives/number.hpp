@@ -17,8 +17,20 @@ namespace lesslang::types::runtime::primitives
 {
     struct number_type final : typecheck::typebase
     {
+    private:
+        bool _content;
+        int64_t _val;
     public:
-        inline number_type() : typebase(typecheck::type_t::TYPE)
+        inline number_type() :
+            typebase(typecheck::type_t::TYPE),
+            _content(false),
+            _val()
+        {
+        }
+        inline number_type(int64_t value) :
+            typebase(typecheck::type_t::TYPE),
+            _content(true),
+            _val(value)
         {
         }
     public:
@@ -35,9 +47,9 @@ namespace lesslang::types::runtime::primitives
     class number_obj final : public object
     {
     private:
-        uint64_t _value;
+        int64_t _value;
     public:
-        number_obj(uint64_t value);
+        number_obj(int64_t value);
     public:
         object * applyOperator(std::string op, object *right) const override;
         object * get(std::string name) const override;
@@ -45,7 +57,7 @@ namespace lesslang::types::runtime::primitives
         object * call(object *super, std::vector<object *> args) const override;
         std::vector<std::string> children() const override;
     public:
-        inline uint64_t value() { return _value; }
+        inline int64_t value() { return _value; }
     };
 }
 
