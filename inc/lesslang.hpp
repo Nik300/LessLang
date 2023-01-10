@@ -5,8 +5,6 @@
 #ifndef __LESSLANG_LIB
 #define __LESSLANG_LIB
 
-#include <lesslang/tokenizer.hpp>
-#include <lesslang/types/token.hpp>
 #include <lesslang/types/runtime/object.hpp>
 #include <lesslang/types/runtime/scope.hpp>
 #include <lesslang/types/runtime/variable.hpp>
