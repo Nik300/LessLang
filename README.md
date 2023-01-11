@@ -28,5 +28,16 @@ Next, build one of the tests as follows:
 For instance, consider the test named "union" under tests/union.cpp, I'd run it like this:
 `make tests/union`
 and that's it <br/>
+## Code Samples
+Here are some code samples I've been desingin for a while now:
+### Hello World!
+```typescript
+message: string = "Hello, World!";
+main(args: [string]): void {
+    sys.println("message:", message);
+}
+```
+The output to this code should be: <br/>
+`message: Hello, World!`
 ## Contributing
 Please feel free to report issues and post PRs if anything looks off to you, and don't hesitate contacting me if you want to contribute to the project at any time.
