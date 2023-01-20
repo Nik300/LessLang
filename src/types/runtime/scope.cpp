@@ -36,13 +36,13 @@ typebase * scope::getType(string name)
 
 bool scope::setLocal(string name, object *value)
 {
-    if (!_locals.count(name) || !_locals[name].type()->check(value)) return false;
+    if (!_locals.count(name) || !value->mutate(_locals[name].type())) return false;
     _locals[name].set(value);
     return true;
 }
 bool scope::setGlobal(string name, object *value)
 {
-    if (!_globals.count(name) || !_globals[name].type()->check(value)) return false;
+    if (!_globals.count(name) || !value->mutate(_globals[name].type())) return false;
     _globals[name].set(value);
     return true;
 }
@@ -50,19 +50,19 @@ bool scope::setGlobal(string name, object *value)
 bool scope::decLocal(string name, typebase *type, object *value)
 {
     if (_locals.count(name)) return false;
-    _locals[name] = variable(name, type);
-    if (value)
+    auto var = _locals[name] = variable(name, type);
+    if (value && value->mutate(var.type()))
     {
         if (!type->check(value, true)) return false;
-        _locals[name].set(value);
+        var.set(value);
     }
     return true;
 }
 bool scope::decGlobal(string name, typebase *type, object *value)
 {
     if (_globals.count(name)) return false;
-    _globals[name] = variable(name, type);
-    if (value)
+    auto var = _globals[name] = variable(name, type);
+    if (value && value->mutate(var.type()))
     {
         if (!type->check(value, true)) return false;
         _globals[name].set(value);

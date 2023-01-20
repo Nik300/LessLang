@@ -45,6 +45,7 @@ object * get_object_property(scope *root, string id)
 bool set_object_property(scope *root, string id, object *value)
 {
     object *curr = nullptr;
+    typebase *type = nullptr;
 
     size_t x = 0;
     size_t c = 0;
