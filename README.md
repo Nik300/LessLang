@@ -8,7 +8,7 @@ Only the math expression evaluator is missing, which i am planning on doing asap
 The project is divided into two main sections: <br/>
 Section | Working Status
 ------- | ---------------
-Runtime | ⭕ Almost done
+Runtime | 📍 Milestone 1
 Parser  | ⌚ Planned
 
 ## How to build
