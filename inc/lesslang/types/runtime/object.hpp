@@ -42,6 +42,9 @@ namespace lesslang::types::runtime
         /// @param args arguments to call the object with
         /// @return return value of the call
         virtual object * call(object *super, std::vector<object *> args) const = 0;
+        virtual std::string represent() const {
+            return "{object}";
+        }
         /// @brief get a list of this object's children names
         /// @return object's children names
         virtual std::vector<std::string> children() const = 0;
@@ -53,6 +56,8 @@ namespace lesslang::types::runtime
             _type(type)
         {
         }
+    public:
+        operator std::string() { return this->represent(); }
     };
 }
 

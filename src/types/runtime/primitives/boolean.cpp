@@ -64,19 +64,19 @@ object * boolean_obj::applyOperator(std::string op, object *right) const
 }
 object * boolean_obj::get(std::string name) const
 {
-    printf("GET %s\n", name.c_str());
     return nullptr;
 }
 bool boolean_obj::set(std::string name, object *value)
 {
-    printf("SET %s\n", name.c_str());
     return false;
 }
 object * boolean_obj::call(object *super, std::vector<object *> args) const
 {
-    printf("%s", _value ? "True" : "False");
-    printf("\n");
     return nullptr;
+}
+std::string boolean_obj::represent() const 
+{
+    return _value ? "True" : "False";
 }
 std::vector<std::string> boolean_obj::children() const
 {

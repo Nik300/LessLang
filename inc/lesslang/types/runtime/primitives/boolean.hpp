@@ -55,6 +55,7 @@ namespace lesslang::types::runtime::primitives
         object * get(std::string name) const override;
         bool set(std::string name, object *value) override;
         object * call(object *super, std::vector<object *> args) const override;
+        std::string represent() const override;
         std::vector<std::string> children() const override;
     public:
         inline bool value() { return _value; }

@@ -1,6 +1,8 @@
 #include <lesslang/types/runtime/primitives/number.hpp>
 
 #include <stdio.h>
+#include <string>
+#include <sstream>
 
 using namespace lesslang::types::runtime::primitives;
 using namespace lesslang::types::runtime;
@@ -70,9 +72,13 @@ bool number_obj::set(std::string name, object *value)
 }
 object * number_obj::call(object *super, std::vector<object *> args) const
 {
-    printf("%ld", _value);
-    printf("\n");
     return nullptr;
+}
+std::string number_obj::represent() const
+{
+    std::stringstream _result;
+    _result << this->_value;
+    return _result.str();
 }
 std::vector<std::string> number_obj::children() const
 {
