@@ -14,9 +14,9 @@ bool union_type::check(object *value, bool first) const
 {
     auto *type = value->type();
 #ifdef __USE_BOOST__
-    BOOST_FOREACH(auto type, _types)
+    BOOST_FOREACH(const auto& type, _types)
 #else
-    for (auto type : _types)
+    for (const auto& type : _types)
 #endif
     {
         if (type->check(value, first)) return true;

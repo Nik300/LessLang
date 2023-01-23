@@ -19,9 +19,9 @@ bool dict_type::check(object *value, bool first) const
     auto map = ((dict_obj *)value)->value();
 
 #ifdef __USE_BOOST__
-    BOOST_FOREACH(auto pair, map)
+    BOOST_FOREACH(const auto& pair, map)
 #else
-    for(auto pair: map)
+    for(const auto& pair: map)
 #endif
     {
         if (_typeMap.find(pair.first) == _typeMap.end()) return false;
@@ -91,9 +91,9 @@ std::string dict_obj::represent() const
     _result << "{ ";
     
 #ifdef __USE_BOOST__
-    BOOST_FOREACH(auto obj, this->_value)
+    BOOST_FOREACH(const auto& obj, this->_value)
 #else
-    for(auto obj : this->_value)
+    for(const auto& obj : this->_value)
 #endif
     {
         _result << obj.first << ": " << obj.second->represent() << ", ";
@@ -106,9 +106,9 @@ std::vector<std::string> dict_obj::children() const
     std::vector<std::string> _result = std::vector<std::string>();
     
 #ifdef __USE_BOOST__
-    BOOST_FOREACH(auto pair, this->_value)
+    BOOST_FOREACH(const auto& pair, this->_value)
 #else    
-    for (auto pair : this->_value)
+    for (const auto& pair : this->_value)
 #endif
     {
         _result.push_back(pair.first);
