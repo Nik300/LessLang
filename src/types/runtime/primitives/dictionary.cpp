@@ -96,7 +96,7 @@ std::string dict_obj::represent() const
     for(const auto& obj : this->_value)
 #endif
     {
-        _result << obj.first << ": " << obj.second->represent() << ", ";
+        _result << "\033[;90m" << obj.first << "\033[0;m" << ": " << obj.second->represent() << ", ";
     }
     _result << "\b\b }";
     return _result.str();

@@ -76,7 +76,7 @@ object * boolean_obj::call(object *super, std::vector<object *> args) const
 }
 std::string boolean_obj::represent() const 
 {
-    return _value ? "True" : "False";
+    return _value ? "\033[1;34mtrue\033[0;m" : "\033[1;34mfalse\033[0;m";
 }
 std::vector<std::string> boolean_obj::children() const
 {

@@ -77,7 +77,7 @@ object * number_obj::call(object *super, std::vector<object *> args) const
 std::string number_obj::represent() const
 {
     std::stringstream _result;
-    _result << this->_value;
+    _result << "\033[;32m" << this->_value << "\033[0;m";
     return _result.str();
 }
 std::vector<std::string> number_obj::children() const

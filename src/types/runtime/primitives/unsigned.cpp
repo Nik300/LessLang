@@ -76,7 +76,7 @@ object * unsigned_obj::call(object *super, std::vector<object *> args) const
 std::string unsigned_obj::represent() const
 {
     std::stringstream _result;
-    _result << std::uppercase << std::hex << this->_value;
+    _result << "\033[;92m" << std::uppercase << std::hex << this->_value << "\033[0;m";
     return _result.str();
 }
 std::vector<std::string> unsigned_obj::children() const

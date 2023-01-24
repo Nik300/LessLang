@@ -72,6 +72,6 @@ std::vector<std::string> string_obj::children() const
 }
 std::string string_obj::represent() const
 {
-    return '"' + this->_value + '"';
+    return "\033[;33m\"" + this->_value + '"' + "\033[0;m";
 }
 #pragma endregion
