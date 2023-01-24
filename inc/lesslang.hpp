@@ -5,6 +5,8 @@
 #ifndef __LESSLANG_LIB
 #define __LESSLANG_LIB
 
+#define __USE_BOOST__
+
 #include <lesslang/types/runtime/object.hpp>
 #include <lesslang/types/runtime/scope.hpp>
 #include <lesslang/types/runtime/variable.hpp>

@@ -64,12 +64,14 @@ bool string_obj::set(std::string name, object *value)
 }
 object * string_obj::call(object *super, std::vector<object *> args) const
 {
-    printf(_value.c_str());
-    printf("\n");
     return nullptr;
 }
 std::vector<std::string> string_obj::children() const
 {
     return std::vector<std::string>();
+}
+std::string string_obj::represent() const
+{
+    return "\033[;33m\"" + this->_value + '"' + "\033[0;m";
 }
 #pragma endregion
