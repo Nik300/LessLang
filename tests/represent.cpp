@@ -6,6 +6,7 @@
 #include <lesslang/types/runtime/primitives/unsigned.hpp>
 #include <lesslang/types/runtime/primitives/boolean.hpp>
 #include <lesslang/types/runtime/primitives/union.hpp>
+#include <lesslang/types/runtime/primitives/null.hpp>
 
 int main()
 {
@@ -18,7 +19,8 @@ int main()
     { "bool", new boolean_obj(true) },
     { "number", new number_obj(70) },
     { "unsigned", new unsigned_obj(0xDEADBEEF) },
-    { "string", new string_obj("Hello, World!") }
+    { "string", new string_obj("Hello, World!") },
+    { "null", null_obj::instance() }
   });
   printf("%s\n", ((std::string)obj).c_str());
 }
