@@ -72,10 +72,7 @@ std::string null_obj::represent() const
 null_obj * null_obj::instance()
 {
   static null_obj * result = nullptr;
-  if (result != nullptr) {
-    printf("NOT NULL\n");
-    return result;
-  }
-  result = new null_obj;
+  if (result != nullptr) return result;
+  return result = new null_obj;
 }
 #pragma endregion

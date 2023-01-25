@@ -20,7 +20,8 @@ int main()
     { "number", new number_obj(70) },
     { "unsigned", new unsigned_obj(0xDEADBEEF) },
     { "string", new string_obj("Hello, World!") },
-    { "null", null_obj::instance() }
+    { "object", null_obj::instance() }
   });
   printf("%s\n", ((std::string)obj).c_str());
+  printf("%s\n", (null_obj::instance()->represent()).c_str());
 }
