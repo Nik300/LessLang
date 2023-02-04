@@ -9,12 +9,6 @@
 #include <lesslang/types/runtime/primitives/null.hpp>
 #include <lesslang/types/runtime/primitives/function.hpp>
 
-lesslang::types::runtime::object * test(lesslang::types::runtime::object *super, std::vector<lesslang::types::runtime::object *> args)
-{
-  if (args.size() == 1) printf("%s\n", args.at(0)->represent().c_str());
-  return lesslang::types::runtime::primitives::null_obj::instance();
-}
-
 int main()
 {
   using namespace lesslang::types::runtime::primitives;
@@ -22,15 +16,8 @@ int main()
   using namespace lesslang::types::typecheck;
   using namespace std;
 
-  builtin_function fn = builtin_function(test, nullptr);
+  document main("main");
 
-  dict_obj obj = dict_obj({
-    { "bool", new boolean_obj(true) },
-    { "number", new number_obj(70) },
-    { "unsigned", new unsigned_obj(0xDEADBEEF) },
-    { "string", new string_obj("Hello, World!") },
-    { "object", null_obj::instance() },
-    { "builtin", &fn }
-  });
-  printf("%s\n", ((std::string)obj).c_str());
+  object* obj = main.eval("0xAF44");
+  printf("%s\n", obj->represent().c_str());
 }

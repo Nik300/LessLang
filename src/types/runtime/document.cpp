@@ -1,10 +1,45 @@
 #include <lesslang/types/runtime/document.hpp>
+#include <lesslang.hpp>
+
+#include <lesslang/types/runtime/primitives/boolean.hpp>
+#include <lesslang/types/runtime/primitives/number.hpp>
+#include <lesslang/types/runtime/primitives/unsigned.hpp>
 
 #include <tuple>
+#include <boost/foreach.hpp>
 
 using namespace std;
 using namespace lesslang::types::runtime;
 using namespace lesslang::types::typecheck;
+
+static bool isnumber(string str)
+{
+#ifdef __USE_BOOST__
+    BOOST_FOREACH(const char &c, str)
+#else
+    for (const char &c : str)
+#endif
+    {
+        if (!std::isdigit(c)) return false;
+    }
+    return true;
+}
+static bool ishex(string str)
+{
+    if (str.find("0x") != 0 && str.find("0X")) return false;
+
+    string expr = str.substr(2);
+    
+#ifdef __USE_BOOST__
+    BOOST_FOREACH(const char &c, expr)
+#else
+    for (const char &c : expr)
+#endif
+    {
+        if ((c < '0' || c > '9') && (c < 'A' || c > 'F') && (c < 'a' || c > 'f')) return false;
+    }
+    return true;
+}
 
 tuple<scope *, string> access_scope(scope *root, string id)
 {
@@ -117,4 +152,14 @@ bool document::import(document *doc, string as)
     
     _root._children[as] = doc->_root;
     return true;
+}
+
+object * document::eval(string expr)
+{
+    using namespace lesslang::types::runtime::primitives;
+    if (isnumber(expr))
+        return new number_obj(std::stoll(expr));
+    if (ishex(expr))
+        return new unsigned_obj(std::stoull(expr.substr(2), 0, 16));
+    return nullptr;
 }

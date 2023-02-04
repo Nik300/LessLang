@@ -31,7 +31,7 @@ namespace lesslang::types::runtime
         bool import(document *doc);
         bool import(document *doc, std::string as);
 
-        object * solve(std::string expr);
+        object * eval(std::string expr);
 
         inline document(std::string name) :
             _root(name, nullptr),
