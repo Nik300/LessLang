@@ -54,7 +54,7 @@ bool scope::decLocal(string name, typebase *type, object *value)
     if (value && value->mutate(var.type()))
     {
         if (!type->check(value, true)) return false;
-        var.set(value);
+        _locals[name].set(value);
     }
     return true;
 }

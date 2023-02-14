@@ -18,6 +18,6 @@ int main()
 
   document main("main");
 
-  object* obj = main.eval("0xAF44");
+  object* obj = main.eval("\rCiao!\b\\");
   printf("%s\n", obj->represent().c_str());
 }

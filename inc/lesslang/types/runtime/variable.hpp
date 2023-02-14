@@ -17,6 +17,7 @@ namespace lesslang::types::runtime
     struct variable final
     {
     friend class scope;
+    friend class garbageCollector;
     private:
         std::string _name;
         typecheck::typebase *_type;
