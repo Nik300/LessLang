@@ -35,6 +35,7 @@ namespace lesslang::types::runtime
 
     object * get(std::string id);
     bool set(std::string id, object *value);
+    bool declare(variable_type var_type, std::string name, typecheck::typebase *type, object *value = nullptr);
 
     scope * root();
     scope * resolve(std::string id);
@@ -50,6 +51,9 @@ namespace lesslang::types::runtime
       _collector(this)
     {
     }
+
+  public:
+    inline garbageCollector & collector() { return _collector; }
   };
 }
 
