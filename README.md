@@ -3,8 +3,8 @@
 The project is in an early stage and is not ready for practical usage.
 ### What's ready
 #### Runtime
-The runtime is almost ready. Objects and types work as expected, operators works and objects can be invoked as well.<br/>
-In the runtime is also present a Garbage Collector.<br/>
+The runtime is almost ready. Objects and types work as expected, operators work and objects can be invoked as well.<br/>
+In the runtime is also present a Garbage Collector. I also expect to implement a cache for objects, in order to ease the weight on both processor and RAM.<br/>
 Math expressions are addressed in the Statement Parser.
 #### Statement Parser
 The statement parser is currently undergoing thinking process and is being structured.<br/>
@@ -40,10 +40,29 @@ Here are some code samples I've been desingin for a while now:
 ```typescript
 message: string = "Hello, World!";
 main(args: [string]): void {
-    sys.println("message:", message);
+  sys.println("message:", message);
 }
 ```
 The output to this code should be: <br/>
 `message: Hello, World!`
+### Module
+#### import
+```typescript
+-> console;
+main(args: [string]): void {
+  console.writeln("Hello!");
+}
+```
+The `->` symbol works as an `import` keyword
+#### export
+```typescript
+<- test;
+^fn(): string {
+  return "Hello!";
+}
+^variable: Const<integer> = 5;
+```
+The symbol `<-` is used to declare the export name of a certain module.<br/>
+The prefix `^` exports the related object.
 ## Contributing
 Please feel free to report issues and post PRs if anything looks off to you, and don't hesitate contacting me if you want to contribute to the project at any time.
