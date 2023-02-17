@@ -1,6 +1,9 @@
 #include <lesslang/types/runtime/primitives/string.hpp>
+#include <lesslang.hpp>
 
 #include <stdio.h>
+#include <boost/foreach.hpp>
+#include <sstream>
 
 using namespace lesslang::types::runtime::primitives;
 using namespace lesslang::types::runtime;
@@ -72,6 +75,22 @@ std::vector<std::string> string_obj::children() const
 }
 std::string string_obj::represent() const
 {
-    return "\033[;33m\"" + this->_value + '"' + "\033[0;m";
+    std::stringstream sstream = std::stringstream();
+#ifdef __USE_BOOST__
+    BOOST_FOREACH(const auto& c, this->_value)
+#else    
+    for (const auto& c : this->_value)
+#endif
+    {
+        if (
+            c == '"' ||
+            c == '\\'
+        ) sstream << "\\" << c;
+        else if (c == '\n') sstream << "\\n";
+        else if (c == '\r') sstream << "\\r";
+        else if (c == '\b') sstream << "\\b";
+        else sstream << c;
+    }
+    return "\033[;33m\"" + sstream.str() + '"' + "\033[0;m";
 }
 #pragma endregion
