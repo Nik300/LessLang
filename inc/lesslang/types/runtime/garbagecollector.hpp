@@ -10,10 +10,7 @@
 
 #include <stddef.h>
 
-#include <lesslang/types/runtime/scope.hpp>
 #include <lesslang/types/runtime/object.hpp>
-
-#include <lesslang/types/typecheck/typebase.hpp>
 
 namespace lesslang::types::runtime
 {
@@ -29,10 +26,15 @@ namespace lesslang::types::runtime
       doc(doc)
     {
     }
+    inline garbageCollector(garbageCollector const &) = delete;
+    inline garbageCollector(garbageCollector &) = delete;
 
     std::vector<object *> collect();
-    void dispose(object *obj);
-    void track(object *obj);
+    void dispose(object *obj) const;
+    bool track(object *obj);
+
+  public:
+    inline void operator=(garbageCollector const &) = delete;
   };
 }
 

@@ -32,7 +32,7 @@ vector<object *> garbageCollector::collect() {
   allocation_table = allocation_table_new;
   return unreferenced_table;
 }
-void garbageCollector::dispose(object *obj) {
+void garbageCollector::dispose(object *obj) const {
     auto locations = doc->locate(obj);
     if (locations.size() == 0) return;
 
@@ -45,6 +45,7 @@ void garbageCollector::dispose(object *obj) {
     var.set(null_obj::instance());
   }
 }
-void garbageCollector::track(object *obj) {
+bool garbageCollector::track(object *obj) {
   allocation_table.push_back(obj);
+  return true;
 }

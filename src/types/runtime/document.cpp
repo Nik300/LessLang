@@ -197,6 +197,22 @@ bool document::set(string id, object *value)
 
   return set_object_property(scope, varname, value);
 }
+bool document::declare(variable_type var_type, std::string name, typebase *type, object *value) {
+  auto [scope, varname] = access_scope(&_root, name);
+
+  if (!scope)
+    return false;
+
+  return (
+    var_type == variable_type::GLOBAL
+      ? scope->decGlobal(varname, type, value)
+      : scope->decLocal(varname, type, value) 
+  ) && (
+    value
+      ? _collector.track(value)
+      : true
+  );
+}
 
 scope * document::root() { return &_root; }
 scope * document::resolve(string id)

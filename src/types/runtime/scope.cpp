@@ -51,22 +51,14 @@ bool scope::decLocal(string name, typebase *type, object *value)
 {
     if (_locals.count(name)) return false;
     auto var = _locals[name] = variable(name, type);
-    if (value && value->mutate(var.type()))
-    {
-        if (!type->check(value, true)) return false;
-        _locals[name].set(value);
-    }
+    if (value && value->mutate(var.type())) _locals[name].set(value);
     return true;
 }
 bool scope::decGlobal(string name, typebase *type, object *value)
 {
     if (_globals.count(name)) return false;
     auto var = _globals[name] = variable(name, type);
-    if (value && value->mutate(var.type()))
-    {
-        if (!type->check(value, true)) return false;
-        _globals[name].set(value);
-    }
+    if (value && value->mutate(var.type())) _globals[name].set(value);
     return true;
 }
 bool scope::decType(string name, typebase *type)
