@@ -1,15 +1,21 @@
-# LessLang
+# LessLang 0.2
 ## Project State
-The project is in an early stage and is not ready for actual use.
+The project is in an early stage and is not ready for practical usage.
 ### What's ready
-The runtime is almost ready. Objects and types work as expected, operators can be called between objects and calling works as well.<br/>
-Only the math expression evaluator is missing, which i am planning on doing asap to start working on the actual language parser
+#### Runtime
+The runtime is almost ready. Objects and types work as expected, operators works and objects can be invoked as well.<br/>
+In the runtime is also present a Garbage Collector.<br/>
+Math expressions are addressed in the Statement Parser.
+#### Statement Parser
+The statement parser is currently undergoing thinking process and is being structured.<br/>
+It will support variable, function and type declarations as well as math expressions and operations between constants.
 ### Division
-The project is divided into two main sections: <br/>
-Section | Working Status
-------- | ---------------
-Runtime | 📍 Milestone 1
-Parser  | ⌚ Planned
+The project is divided into three main sections: <br/>
+Section          | Working Status
+---------------- | --------------------
+Runtime          | 📍 Milestone 2
+Statement Parser | ⚒️ Work in Progress
+Parser           | ⌚ Planned
 
 ## How to build
 ### Unix systems (Linux/macOS)
