@@ -1,4 +1,6 @@
 #include <lesslang/types/runtime/primitives/union.hpp>
+#include <lesslang.hpp>
+#include <boost/foreach.hpp>
 
 #include <stdio.h>
 
@@ -11,7 +13,11 @@ object * union_type::typeInfo() { return nullptr; }
 bool union_type::check(object *value, bool first) const
 {
     auto *type = value->type();
-    for (auto type : _types)
+#ifdef __USE_BOOST__
+    BOOST_FOREACH(const auto& type, _types)
+#else
+    for (const auto& type : _types)
+#endif
     {
         if (type->check(value, first)) return true;
     }

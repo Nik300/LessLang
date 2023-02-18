@@ -24,7 +24,7 @@ namespace lesslang::types::runtime
         /// @param op operator to apply
         /// @param right right operand
         /// @return new object with applied operator
-        virtual object * applyOperator(std::string op, object *right) const = 0;
+        virtual object * applyOperator(std::string op, object *right) const { return nullptr; }
         /// @brief get property of element
         /// @param name name of the child to return
         /// @return object child
@@ -41,10 +41,13 @@ namespace lesslang::types::runtime
         /// @param super value of 'this' 
         /// @param args arguments to call the object with
         /// @return return value of the call
-        virtual object * call(object *super, std::vector<object *> args) const = 0;
+        virtual object * call(object *super, std::vector<object *> args) const { return nullptr; }
+        virtual std::string represent() const {
+            return "{object}";
+        }
         /// @brief get a list of this object's children names
         /// @return object's children names
-        virtual std::vector<std::string> children() const = 0;
+        virtual std::vector<std::string> children() const { return std::vector<std::string>(); }
         const typecheck::typebase * type() const;
     private:
         bool mutate(const typecheck::typebase *type);
@@ -53,6 +56,13 @@ namespace lesslang::types::runtime
             _type(type)
         {
         }
+    public:
+        inline object() :
+            _type()
+        {
+        }
+    public:
+        operator std::string() { return this->represent(); }
     };
 }
 

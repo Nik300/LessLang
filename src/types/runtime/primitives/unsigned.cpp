@@ -1,6 +1,7 @@
 #include <lesslang/types/runtime/primitives/unsigned.hpp>
 
 #include <stdio.h>
+#include <sstream>
 
 using namespace lesslang::types::runtime::primitives;
 using namespace lesslang::types::runtime;
@@ -70,9 +71,13 @@ bool unsigned_obj::set(std::string name, object *value)
 }
 object * unsigned_obj::call(object *super, std::vector<object *> args) const
 {
-    printf("%lX", _value);
-    printf("\n");
     return nullptr;
+}
+std::string unsigned_obj::represent() const
+{
+    std::stringstream _result;
+    _result << "\033[;92m" << std::uppercase << std::hex << this->_value << "\033[0;m";
+    return _result.str();
 }
 std::vector<std::string> unsigned_obj::children() const
 {

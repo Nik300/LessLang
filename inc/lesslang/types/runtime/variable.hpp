@@ -10,40 +10,49 @@
 
 namespace lesslang::types::typecheck
 {
-    struct typebase;
+  struct typebase;
 }
 namespace lesslang::types::runtime
 {
-    struct variable final
-    {
+  enum class variable_type : uint8_t
+  {
+    LOCAL,
+    GLOBAL
+  };
+  struct variable final
+  {
     friend class scope;
-    private:
-        std::string _name;
-        typecheck::typebase *_type;
-        object *_value;
-    public:
-        inline variable(std::string name, typecheck::typebase *type) :
-            _name(name),
-            _type(type)
-        {
-        }
-        inline variable() :
-            _name(),
-            _type()
-        {
-        }
-    public:
-        inline const std::string & name() const { return _name; }
-        inline const typecheck::typebase * type() const { return _type; }
-    public:
-        inline object * get() const { return _value; }
-        inline void set(object *value) { _value = value; }
-    public:
-        inline const object * operator->() const
-        {
-            return _value;
-        }
-    };
+    friend class garbageCollector;
+
+  private:
+    std::string _name;
+    typecheck::typebase *_type;
+    object *_value;
+
+  public:
+    inline variable(std::string name, typecheck::typebase *type) : _name(name),
+                                                                   _type(type)
+    {
+    }
+    inline variable() : _name(),
+                        _type()
+    {
+    }
+
+  public:
+    inline const std::string &name() const { return _name; }
+    inline const typecheck::typebase *type() const { return _type; }
+
+  public:
+    inline object *get() const { return _value; }
+    inline void set(object *value) { _value = value; }
+
+  public:
+    inline const object *operator->() const
+    {
+      return _value;
+    }
+  };
 }
 
 #endif
